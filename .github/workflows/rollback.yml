@@ -53,9 +53,17 @@ jobs:
           TAGS=$(git tag --sort=-creatordate)
           echo "Available tags:"
           echo "$TAGS"
-          PREVIOUS_VERSION=$(echo "$TAGS" | awk 'NR==2')
-          git checkout $(git rev-list -n 1 $(git rev-parse $PREVIOUS_VERSION))
-          echo "Checked out to $PREVIOUS_VERSION"
+          # PREVIOUS_VERSION=$(echo "$TAGS" | awk 'NR==2')
+          # git checkout $(git rev-list -n 1 $(git rev-parse $PREVIOUS_VERSION))
+          # echo "Checked out to $PREVIOUS_VERSION"
+          read -p "Enter the number corresponding to the version you want to checkout to: " VERSION_NUMBER
+    
+          # Get the selected version from the list
+          CHOSEN_VERSION=$(echo "$TAGS" | sed -n "${VERSION_NUMBER}p")
+          
+          # Checkout to the selected version
+          git checkout $(git rev-list -n 1 $(git rev-parse $CHOSEN_VERSION))
+          echo "Checked out to $CHOSEN_VERSION"
 
       # Setup Pages
       - name: Setup Pages
