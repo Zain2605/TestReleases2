@@ -47,9 +47,15 @@ jobs:
 
       # Checkout the previous version commit
       - name: Checkout previous version
-        if: steps.prev_version.outputs.previous_version != ''
+        # if: steps.prev_version.outputs.previous_version != ''
         run: |
+          git fetch --tags
+          TAGS=$(git tag --sort=-creatordate)
+          echo "Available tags:"
+          echo "$TAGS"
+          PREVIOUS_VERSION=$(echo "$TAGS" | awk 'NR==2')
           git checkout $(git rev-list -n 1 $(git rev-parse $PREVIOUS_VERSION))
+          echo "Checked out to $PREVIOUS_VERSION"
 
       # Setup Pages
       - name: Setup Pages
