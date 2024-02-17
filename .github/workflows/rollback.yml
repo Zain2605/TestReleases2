@@ -36,6 +36,10 @@ jobs:
           PREVIOUS_VERSION=$(git tag --sort=-creatordate | awk 'NR==2')
           echo "::set-output name=previous_version::$PREVIOUS_VERSION"
 
+      # Echo the previous version
+      - name: Echo Previous Version
+        run: echo "Previous Version is $PREVIOUS_VERSION"
+
       # Checkout the previous version commit
       - name: Checkout previous version
         if: steps.prev_version.outputs.previous_version != ''
