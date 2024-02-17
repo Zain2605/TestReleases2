@@ -40,7 +40,7 @@ jobs:
       - name: Checkout previous version
         if: steps.prev_version.outputs.previous_version != ''
         run: |
-          git checkout $(git rev-list -n 1 $PREVIOUS_VERSION)
+          git checkout $(git rev-list -n 1 $(git rev-parse $PREVIOUS_VERSION))
 
       # Setup Pages
       - name: Setup Pages
