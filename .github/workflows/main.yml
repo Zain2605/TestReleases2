@@ -1,4 +1,4 @@
-name: Deploy static content and create release
+name: Deploy static content
 
 on:
   # Runs on pushes targeting the default branch
@@ -42,16 +42,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
-      # Create a release
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        with:
-          tag_name: v${{ github.run_number }}
-          release_name: Release v${{ github.run_number }}
-          body: |
-            This is an automatic release created by GitHub Actions.
-          draft: false
-          prerelease: false
-          token: ${{ secrets.GITHUB_TOKEN }}
