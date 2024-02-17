@@ -34,6 +34,7 @@ jobs:
           # Use git to list tags in reverse chronological order
           git fetch --tags
           PREVIOUS_VERSION=$(git tag --sort=-creatordate | awk 'NR==2')
+          echo "Previous Version is $PREVIOUS_VERSION"
           echo "::set-output name=previous_version::$PREVIOUS_VERSION"
 
       # Echo the previous version
